@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ForumApp.Data.Models
 {
@@ -12,6 +13,6 @@ namespace ForumApp.Data.Models
         public virtual ApplicationUser User { get; set; }
         public virtual Forum Forum { get; set; }
 
-        public virtual IEquatable<PostReply> Replies { get; set; }
+        public virtual IEnumerable<PostReply> Replies { get; set; }
     }
 }
