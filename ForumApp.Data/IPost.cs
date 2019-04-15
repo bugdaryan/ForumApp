@@ -13,8 +13,8 @@ namespace ForumApp.Data
         IEnumerable<Post> GetFilteredPosts(string searchQuery);
         IEnumerable<Post> GetPostsByForum(int id);
 
-        Task Add(Post post);
-        Task Delete(int id);
-        Task EditPostContent(int id, string newContent);
+        Task AddAsync(Post post);
+        Task DeleteAsync(int id);
+        Task EditPostContentAsync(int id, string newContent);
     }
 }

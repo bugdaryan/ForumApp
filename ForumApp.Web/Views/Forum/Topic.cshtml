@@ -4,6 +4,11 @@
 }
 <h2>Welcome to the @Model.Forum.Title Forum!</h2>
 
+<span id="headingBtn">
+    <a asp-controller="Post" asp-action="Create" asp-route-id=@Model.Forum.Id class="btn btn-newPost">
+        Create Post
+    </a>
+</span>
 @if(Model.Posts.Any())
 {
     <table class="table table-bordered table-hover">
