@@ -1,5 +1,6 @@
 ﻿using ForumApp.Data;
 using ForumApp.Data.Models;
+using ForumApp.Service;
 using ForumApp.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,7 @@ namespace ForumApp.Web
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IForum, ForumServices>();
 
             services.AddMvc();
         }
