@@ -67,11 +67,22 @@ namespace ForumApp.Web.Controllers
             var user = await _userManager.FindByIdAsync(userId);
 
             var post = BuildPost(model, user);
+
+            await _postService.AddAsync(post);
+            return RedirectToAction("Index", "Post", new { Id = post.Id });
         }
 
-        private object BuildPost(NewPostModel model, ApplicationUser user)
+        private Post BuildPost(NewPostModel model, ApplicationUser user)
         {
-            throw new NotImplementedException();
+            var forum = _forumService.GetById(model.ForumId);
+            return new Post
+            {
+                Title = model.Title,
+                Content = model.Content,
+                Created = DateTime.Now,
+                User = user,
+                Forum = forum
+            };
         }
 
         private IEnumerable<PostReplyModel> BuildPostReplies(IEnumerable<PostReply> replies)

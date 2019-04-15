@@ -1,0 +1,16 @@
+﻿@model ForumApp.Web.Models.Post.NewPostModel
+
+<h1>New Post | @Model.ForumTitle</h1>
+
+<form asp-action="AddPostAsync" method="post" id="addPostForm">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title"class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <input asp-for="Content"class="form-control"/>
+    </div>
+    <button type="submit" id="submitPostBtn" class="btn btn-submit-Post">Submit Post</button>
+    <input asp-for="ForumId" type="hidden"/>
+</form>
