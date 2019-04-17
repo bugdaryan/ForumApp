@@ -39,7 +39,9 @@ namespace ForumApp.Web.Controllers
                 Created = post.Created,
                 PostContent = post.Content,
                 Title = post.Title,
-                Replies = replies
+                Replies = replies,
+                ForumId = post.Forum.Id,
+                ForumTitle = post.Forum.Title
             };
             return View(model);
         }

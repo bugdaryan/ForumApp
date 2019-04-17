@@ -1,5 +1,16 @@
 ﻿@model ForumApp.Web.Models.Post.PostIndexModel
 
+<div class="container body-content">
+    <div class="row postHeader">
+        <div class="postHeading">
+            <span class="postIndexTitle">
+                @Model.Title
+            </span>
+            <span id="headingBtn"><a asp-controller="Forum" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-back">Back to @Model.ForumTitle</a></span>
+        </div>
+    </div>
+</div>
+
 <h1>@Model.Title</h1>
 
 <div>
