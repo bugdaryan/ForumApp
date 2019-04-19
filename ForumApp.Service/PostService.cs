@@ -74,8 +74,10 @@ namespace ForumApp.Service
 
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
         {
-            string query = System.Text.RegularExpressions.Regex.Replace(searchQuery, @"\s+", " ").Trim().ToLower();
-            return forum.Posts
+            string query = string.IsNullOrEmpty(searchQuery)? null: System.Text.RegularExpressions.Regex.Replace(searchQuery, @"\s+", " ").Trim().ToLower();
+            return string.IsNullOrEmpty(query) ? 
+                forum.Posts 
+                :forum.Posts
                 .Where(post =>
                 post.Title.ToLower().Contains(query)
                 || post.Content.ToLower().Contains(query));

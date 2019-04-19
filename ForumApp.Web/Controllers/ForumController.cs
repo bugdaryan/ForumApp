@@ -40,14 +40,7 @@ namespace ForumApp.Web.Controllers
         {
             IEnumerable<Post> posts;
             var forum = _forumService.GetById(id);
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                posts = _postService.GetFilteredPosts(forum, searchQuery);
-            }
-            else
-            {
-                posts = forum.Posts;
-            }
+            posts = _postService.GetFilteredPosts(forum, searchQuery);
 
             var postListings = posts.Select(post => new PostListingModel
             {
