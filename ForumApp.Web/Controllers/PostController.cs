@@ -41,7 +41,8 @@ namespace ForumApp.Web.Controllers
                 Title = post.Title,
                 Replies = replies,
                 ForumId = post.Forum.Id,
-                ForumTitle = post.Forum.Title
+                ForumTitle = post.Forum.Title,
+                IsAuthorAdmin = IsAuthorAdmin(post.User)
             };
             return View(model);
         }
@@ -74,6 +75,11 @@ namespace ForumApp.Web.Controllers
             return RedirectToAction("Index", "Post", new { Id = post.Id });
         }
 
+        private bool IsAuthorAdmin(ApplicationUser user)
+        {
+            return _userManager.GetRolesAsync(user).Result.Contains("Admin");
+        }
+
         private Post BuildPost(NewPostModel model, ApplicationUser user)
         {
             var forum = _forumService.GetById(model.ForumId);
@@ -98,7 +104,8 @@ namespace ForumApp.Web.Controllers
                 AuthorImageUrl = reply.User.ProfileImageUrl,
                 AuthorName = reply.User.UserName,
                 AuthorRating = reply.User.Rating,
-                PostId = reply.Post.Id
+                PostId = reply.Post.Id,
+                IsAuthorAdmin = IsAuthorAdmin(reply.User)
             });
         }
     }

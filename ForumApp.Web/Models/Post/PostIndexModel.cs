@@ -16,6 +16,7 @@ namespace ForumApp.Web.Models.Post
         public string PostContent { get; set; }
         public string ForumTitle { get; set; }
         public int ForumId { get; set; }
+        public bool IsAuthorAdmin { get; set; }
 
         public IEnumerable<PostReplyModel> Replies { get; set; }
     }
