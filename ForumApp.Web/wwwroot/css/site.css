@@ -148,6 +148,113 @@
     background-color:#ddd;
 }
 
+.postAuthorImage{
+    width:80px;
+    height:80px;
+    background-size:100%;
+}
+
+.postAuthorContainer{
+    padding:12px;
+    color:#444;
+    font-family:'Roboto';
+    width:190px;
+}
+
+.postIndexTitle{
+    font-size:1.4em;
+}
+
+.postContentContainer{
+    font-family:'Roboto';
+    color:#222;
+    padding:22px;
+    border-left:1px solid #ddd;
+}
+
+.postAuthorRating{
+    font-size:0.9em;
+    color:#159;
+    font-family:'Roboto mono';
+}
+
+#postIndexContent{
+    background-color:white;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2), 0 6px 6px rgba(0,0,0,0.3);
+}
+
+.postHeader{
+    background-color:#212121;
+    padding:8px 0 24px 24px;
+}
+
+.btn-back{
+    background-color:#555;
+    color:#fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 0px !important;
+}
+
+.btn-back:hover{
+    transition:ease-in 0.1s;
+    background-color:#1E88E5 !important;
+}
+
+.btn-newReply{
+    background-color:#5C6BC0 !important;
+    color:#fff !important;
+    transition: ease-in 0.1s;
+    border-radius:0px !important;
+}
+
+.btn-newReply:hover{
+    background-color:#9FA8DA !important;
+    transition: ease-in 0.1s;
+}
+
+.btn-file{
+    color:white;
+    width:100%;
+    background-color:#4FC3F7;
+    transition: ease 0.3s;
+}
+
+.btn-file:hover{
+    background-color:#039BE5;
+    transition: ease 0.3s; 
+}
+
+.btn-newPost{
+    background-color:#C62828 !important;
+    color:#fff !important;
+    transition: ease-in 0.1s;
+    border-radius:0px !important;
+}
+
+.btn-newPost:hover{
+    transition: ease-in 0.1s;
+    background-color:#E53935 !important;
+    color:#fff !important;
+}
+
+.btn-submitPost{
+    background-color:#00695C !important;
+    color:#fff !important;
+    transition: ease-in 0.1s;
+    border-radius: 0px !important;
+}
+
+.btn-submitPost:hover{
+    transition: ease-in 0.1s;
+    background-color:#00897B !important;
+    color:#fff !important;
+}
+
+#headingBtn{
+    float:right;
+    margin-right:20px;
+}
+
 #forumIndexTable td{
     background-color:rgba(255,255,255,0.9);
 }
@@ -209,6 +316,10 @@
     text-align:center;
     padding-top:30px;
     font-family:'Roboto Mono';
+}
+
+.noPosts h3{
+    color:white;
 }
 
 .createPostSection{
