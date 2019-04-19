@@ -23,6 +23,7 @@ namespace ForumApp.Data
         IEnumerable<Post> GetPostsByForumId(int id);
         IEnumerable<Post> GetPostsBetween(DateTime start, DateTime end);
         IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery);
+        IEnumerable<Post> GetFilteredPosts(string searchQuery);
         IEnumerable<ApplicationUser> GetAllUsers(IEnumerable<Post> posts);
         IEnumerable<Post> GetLatestPosts(int count);
         string GetForumImageUrl(int id);

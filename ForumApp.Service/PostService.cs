@@ -83,6 +83,18 @@ namespace ForumApp.Service
                 || post.Content.ToLower().Contains(query));
         }
 
+        public IEnumerable<Post> GetFilteredPosts(string searchQuery)
+        {
+
+            string query = string.IsNullOrEmpty(searchQuery)? null: System.Text.RegularExpressions.Regex.Replace(searchQuery, @"\s+", " ").Trim().ToLower();
+            return string.IsNullOrEmpty(query) ?
+               GetAll()
+              :GetAll() 
+                .Where(post =>
+                post.Title.ToLower().Contains(query)
+                || post.Content.ToLower().Contains(query));
+        }
+
         public string GetForumImageUrl(int id)
         {
             return GetById(id).Forum.ImageUrl;
