@@ -72,10 +72,11 @@ namespace ForumApp.Service
             return GetAll().First(post => post.Id == id);
         }
 
-        public IEnumerable<Post> GetFilteredPosts(string searchQuery)
+        public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
         {
             string query = System.Text.RegularExpressions.Regex.Replace(searchQuery, @"\s+", " ").Trim().ToLower();
-            return GetAll().Where(post =>
+            return forum.Posts
+                .Where(post =>
                 post.Title.ToLower().Contains(query)
                 || post.Content.ToLower().Contains(query));
         }

@@ -3,6 +3,7 @@ using ForumApp.Data.Models;
 using ForumApp.Web.Models.Forum;
 using ForumApp.Web.Models.Post;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ForumApp.Web.Controllers
@@ -12,9 +13,10 @@ namespace ForumApp.Web.Controllers
         private readonly IForum _forumService;
         private readonly IPost _postService;
 
-        public ForumController(IForum forumService)
+        public ForumController(IForum forumService, IPost postService)
         {
             _forumService = forumService;
+            _postService = postService;
         }
 
         public IActionResult Index()
@@ -34,10 +36,18 @@ namespace ForumApp.Web.Controllers
             return View(model);
         }
 
-        public IActionResult Topic(int id)
+        public IActionResult Topic(int id, string searchQuery)
         {
+            IEnumerable<Post> posts;
             var forum = _forumService.GetById(id);
-            var posts = forum.Posts;
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                posts = _postService.GetFilteredPosts(forum, searchQuery);
+            }
+            else
+            {
+                posts = forum.Posts;
+            }
 
             var postListings = posts.Select(post => new PostListingModel
             {
@@ -58,6 +68,12 @@ namespace ForumApp.Web.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Search(int id, string searchQuery)
+        {
+            return RedirectToAction("Topic", new { id, searchQuery });
         }
 
         private ForumListingModel BuildForumListing(Forum forum)
