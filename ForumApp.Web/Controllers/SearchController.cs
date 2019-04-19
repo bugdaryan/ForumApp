@@ -22,7 +22,7 @@ namespace ForumApp.Web.Controllers
             return View();
         }
 
-        public IActionResult Result(string searchQuery)
+        public IActionResult Results(string searchQuery)
         {
             var posts = _postService.GetFilteredPosts(searchQuery);
 
