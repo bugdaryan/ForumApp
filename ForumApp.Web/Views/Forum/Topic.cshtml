@@ -14,7 +14,7 @@
             <form asp-controller="Forum" asp-action="Search" method="post">
                 <div class="searchForm">
                     <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)">
-                    <button type="submit" class="btn buttonSearch">
+                    <button type="submit" class="btn btn-forumSearch">
                         <i class="material-icons">search</i>
                     </button>
                 </div>
@@ -74,7 +74,7 @@
                 </tbody>
             </table>
         }
-        @*else if (@Model.EmptySearchResults)
+        else if (string.IsNullOrEmpty(@Model.SearchQuery) || string.IsNullOrWhiteSpace(Model.SearchQuery))
         {
             <div class="noPosts">
                 <i class="material-icons md-72">question_answer</i>
@@ -83,7 +83,7 @@
                 </h3>
             </div>
 
-        }*@
+       } 
 
         else if (!@Model.Posts.Any())
         {
