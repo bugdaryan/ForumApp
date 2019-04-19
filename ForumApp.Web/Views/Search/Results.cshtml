@@ -1,4 +1,4 @@
-﻿@model ForumApp.Web.Models.Forum.ForumTopicModel
+﻿@model ForumApp.Web.Models.Search.SearchResultModel
 @{
     ViewData["Title"] = "Topic";
 }
@@ -6,31 +6,15 @@
 <div class="container body-content">
     <div class="row sectionHeader">
         <div class="sectionHeading">
-            <span id="results">@Model.Forum.Title Forum</span>
-            @if (Context.User.Identity.IsAuthenticated)
-            {
-                <span id="headingBtn"><a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="btn btn-newPost">Create Post</a></span>
-            }
-            <form asp-controller="Forum" asp-action="Search" method="post">
+            <span id="results">Results for: @Model.SearchQuery</span>
+            <form asp-controller="Search" asp-action="Search" method="post">
                 <div class="searchForm">
                     <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)">
-                    <button type="submit" class="btn btn-forumSearch">
+                    <button type="submit" class="btn buttonSearch">
                         <i class="material-icons">search</i>
                     </button>
                 </div>
-                <input asp-for="Forum.Id" name="id" type="hidden" />
             </form>
-        </div>
-        <div class="sectionDescription">
-            <div class="forumLogo" style="background-image: url(@Model.Forum.ImageUrl); background-size:100%"></div>
-            <p>Welcome to the <strong>@Model.Forum.Title</strong> forum. Please keep posts friendly and on-topic.</p>
-            <p>
-                Please read the Forum Guidelines before creating a new post.
-                @if (!Context.User.Identity.IsAuthenticated)
-                {
-                    <span>You must be a <a asp-controller="Account" asp-action="Register">registered member</a> to create a new post.</span>
-                }
-            </p>
         </div>
     </div>
     <div class="row" id="forumIndexContent">
@@ -42,18 +26,25 @@
                     {
                         <tr>
                             <td>
+                                <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl); background-size:100%"></div>
                                 <div class="postData">
                                     <div class="postTitle">
                                         <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
                                     </div>
                                     <div class="forumSubTitle">
                                         <div>
+                                            by:
                                             <span class="postAuthor">
                                                 <a asp-controller="Profile" asp-action="Detail" asp-route-id="@post.AuthorId">
                                                     @post.AuthorName
                                                 </a>
+                                                (@post.AuthorRating)
                                             </span>
-                                            (@post.AuthorRating) on
+                                            in:
+                                            <span class="postForum">
+                                                <a asp-controller="Forum" asp-action="Topic" asp-route-id="@post.Forum.Id">@post.Forum.Title</a>
+                                            </span>
+                                            on:
                                             <span class="postDate">
                                                 @post.DatePosted
                                             </span>
@@ -74,7 +65,7 @@
                 </tbody>
             </table>
         }
-        else if (string.IsNullOrEmpty(@Model.SearchQuery) || string.IsNullOrWhiteSpace(Model.SearchQuery))
+        else if (@Model.EmptySearchResult)
         {
             <div class="noPosts">
                 <i class="material-icons md-72">question_answer</i>
@@ -83,17 +74,6 @@
                 </h3>
             </div>
 
-       } 
-
-        else if (!@Model.Posts.Any())
-        {
-            <div class="noPosts">
-                <i class="material-icons md-72">question_answer</i>
-                <h3>
-                    It looks like there are no @Model.Forum.Title posts yet. <br />
-                    Why not <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id"><span>Create One?</span></a>
-                </h3>
-            </div>
         }
     </div>
 </div>
